@@ -1,0 +1,24 @@
+name: 'workflows日志自动清理'
+
+on:
+  #schedule:
+  #  - cron: '0 0 */3 * *'
+  workflow_dispatch:
+
+jobs:
+  del_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete workflow runs
+        uses: Jejz168/delete-workflow-runs@main
+        with:
+          retain_days: '3'
+
+      - name: Remove old Releases
+        uses: Jejz168/delete-older-releases@master
+        with:
+          keep_latest: 16
+          delete_tags: true
+          delete_tag_pattern: "*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
