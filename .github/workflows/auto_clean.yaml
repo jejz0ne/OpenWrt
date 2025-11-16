@@ -23,22 +23,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Delete old tags (keep latest N)
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          KEEP_LATEST: 3   # 保留最新 3 个 tag
-        run: |
-           tags=($(gh api repos/${GITHUB_REPOSITORY}/tags --paginate --jq '.[].name'))
-
-           total=${#tags[@]}
-           echo "Total tags: $total, keeping latest $KEEP_LATEST"
-
-           for (( i=KEEP_LATEST; i<total; i++ )); do
-             tag=${tags[$i]}
-             echo "Deleting tag: $tag"
-             gh api -X DELETE repos/${GITHUB_REPOSITORY}/git/refs/tags/$tag
-           done
-
       - name: Delete old tags
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
