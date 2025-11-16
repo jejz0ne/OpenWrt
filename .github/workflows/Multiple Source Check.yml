@@ -264,5 +264,5 @@ jobs:
       uses: Jejz168/delete-workflow-runs@main
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        retain_days: 30
+        retain_days: 6
         keep_minimum_runs: 8
