@@ -25,9 +25,9 @@ jobs:
 
       - name: Delete old tags (keep latest N)
         env:
-         GH_TOKEN: ${{ secrets.GH_TOKEN }}
-         KEEP_LATEST: 3   # 保留最新 3 个 tag
-         run: |
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          KEEP_LATEST: 3   # 保留最新 3 个 tag
+        run: |
            tags=($(gh api repos/${GITHUB_REPOSITORY}/tags --paginate --jq '.[].name'))
 
            total=${#tags[@]}
@@ -38,3 +38,34 @@ jobs:
              echo "Deleting tag: $tag"
              gh api -X DELETE repos/${GITHUB_REPOSITORY}/git/refs/tags/$tag
            done
+
+      - name: Delete old tags
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          KEEP_DAYS: 10
+        run: |
+          echo "Deleting tags older than $KEEP_DAYS days..."
+
+          cutoff=$(date -d "-$KEEP_DAYS days" +%s)
+
+          tags=$(gh api repos/${GITHUB_REPOSITORY}/tags --paginate --jq '.[].name')
+
+          for tag in $tags; do
+            echo "Checking tag: $tag"
+
+            sha=$(gh api repos/${GITHUB_REPOSITORY}/git/ref/tags/${tag} --jq '.object.sha' 2>/dev/null)
+            if [ -z "$sha" ]; then
+              echo "  ⚠️ 无法获取 SHA，跳过 $tag"
+              continue
+            fi
+
+            cdate=$(gh api repos/${GITHUB_REPOSITORY}/git/commits/$sha --jq '.committer.date')
+            cts=$(date -d "$cdate" +%s)
+
+            if [ "$cts" -lt "$cutoff" ]; then
+              echo "  ❌ 删除 tag: $tag"
+              gh api -X DELETE repos/${GITHUB_REPOSITORY}/git/refs/tags/$tag
+            else
+              echo "  ✔ 保留: $tag"
+            fi
+          done
