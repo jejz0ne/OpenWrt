@@ -421,7 +421,7 @@ jobs:
       with:
         name: ${{ env.DATE }} 「 ${{ env.FILE_NAME }}_${{ env.KERNEL }} 」[LEDE-2305]固件
         allowUpdates: true
-        tag: ${{ env.TAG }}-2305_${{ env.KERNEL }}
+        tag: ${{ env.TAG }}_2305_${{ env.KERNEL }}
         token: ${{ secrets.GH_TOKEN }}
         body: |
           **This is LEDE-2305 Firmware for ${{ env.FILE_NAME }}**
@@ -737,7 +737,7 @@ jobs:
         name: ${{ env.DATE }} 「 ${{ env.FILE_NAME }}_${{ env.KERNEL }} 」[LEDE-2305]固件
         allowUpdates: true
         removeArtifacts: true
-        tag: ${{ env.TAG }}-2305_${{ env.KERNEL }}
+        tag: ${{ env.TAG }}_2305_${{ env.KERNEL }}
         token: ${{ secrets.GH_TOKEN }}
         body: |
           **This is LEDE-2305 Firmware for ${{ env.FILE_NAME }}**
@@ -1051,7 +1051,7 @@ jobs:
         name: ${{ env.DATE }} 「 ${{ env.FILE_NAME }}_${{ env.KERNEL }} 」[LEDE-2305]固件
         allowUpdates: true
         removeArtifacts: true
-        tag: ${{ env.TAG }}-2305_${{ env.KERNEL }}
+        tag: ${{ env.TAG }}_2305_${{ env.KERNEL }}
         token: ${{ secrets.GH_TOKEN }}
         body: |
           **This is LEDE-2305 Firmware for ${{ env.FILE_NAME }}**
@@ -1369,7 +1369,7 @@ jobs:
         name: ${{ env.DATE }} 「 ${{ env.FILE_NAME }}_${{ env.KERNEL }} 」[LEDE-2305]固件
         allowUpdates: true
         removeArtifacts: true
-        tag: ${{ env.TAG }}-2305_${{ env.KERNEL }}
+        tag: ${{ env.TAG }}_2305_${{ env.KERNEL }}
         token: ${{ secrets.GH_TOKEN }}
         body: |
           **This is LEDE-2305 Firmware for ${{ env.FILE_NAME }}**
