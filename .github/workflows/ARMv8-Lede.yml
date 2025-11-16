@@ -199,7 +199,7 @@ jobs:
           内容: ${{ env.commit }}
           hash: ${{ env.hash }}
           ✪ ✣ ✤ ✥ ✦ ❉ ❦ ❧ ❃ ❂ ❁ ❀
-          📍: https://github.com/${{ github.repository }}/OpenWrt/releases/tag/${{ env.PRODUCT_NAME }}
+          📍: https://github.com/${{ github.repository }}/releases/tag/${{ env.PRODUCT_NAME }}
 
     - name: Push notification
       uses: xhnmt/pushplus-action@main
@@ -217,4 +217,4 @@ jobs:
           内容: ${{ env.commit }}
           hash: ${{ env.hash }}
           ✪ ✣ ✤ ✥ ✦ ❉ ❦ ❧ ❃ ❂ ❁ ❀
-          📍: https://github.com/${{ github.repository }}/OpenWrt/releases/tag/${{ env.PRODUCT_NAME }}
+          📍: https://github.com/${{ github.repository }}/releases/tag/${{ env.PRODUCT_NAME }}
