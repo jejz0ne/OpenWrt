@@ -87,6 +87,8 @@ sed -i '$a net.core.rmem_max=16777216' package/base-files/files/etc/sysctl.conf
 
 # 报错修复
 # rm -rf feeds/packages/utils/v2dat
+rm -rf feeds/luci/applications/luci-app-attendedsysupgrade
+
 if [ "$REPO_BRANCH" != "openwrt-23.05" ]; then
     echo "开始修复报错……"
     # cp -f $GITHUB_WORKSPACE/personal/rust/* feeds/packages/lang/rust/Makefile
