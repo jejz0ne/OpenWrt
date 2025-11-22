@@ -76,8 +76,9 @@ sed -i '$a net.core.rmem_max=16777216' package/base-files/files/etc/sysctl.conf
 
 # 删除所有包含 luci-app-attendedsysupgrade 的 Makefile 行
 for f in $(grep -rl 'luci-app-attendedsysupgrade' package feeds | grep 'Makefile$'); do
-    echo "Cleaning $f ..."
+    echo -n "Cleaning $f ..."
     sed -i '/luci-app-attendedsysupgrade/d' "$f"
+    echo "✅"
 done
 
 # 报错修复
