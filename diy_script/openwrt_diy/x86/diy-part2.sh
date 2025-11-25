@@ -99,7 +99,8 @@ done
 if [ "$REPO_BRANCH" != "openwrt-23.05" ]; then
     echo "开始修复报错……"
     # cp -f $GITHUB_WORKSPACE/personal/rust/* feeds/packages/lang/rust/Makefile
-    sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
+    # sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
+    sed -i 's/--build-dir\ $(HOST_BUILD_DIR)\/build/--build-dir\ $(HOST_BUILD_DIR)\/build\ \\\n\		--ci\ false/' feeds/packages/lang/rust/Makefile
     echo "修复完成……"
 fi
 
@@ -109,7 +110,7 @@ rm -rf feeds/packages/net/adguardhome
 clone_dir main https://github.com/xiangfeidexiaohuo/2305-ipk luci-app-adguardhome luci-app-pushbot luci-app-poweroff
 
 # 判断 REPO_BRANCH 再设置
-if [ "$REPO_BRANCH" = "openwrt-23.05" ]; then
+if [ "$REPO_BRANCH" == "openwrt-23.05" ]; then
     echo "Detected REPO_BRANCH as openwrt-23.05..."
     # 替换immortalwrt插件
     clone_dir openwrt-23.05 https://github.com/immortalwrt/luci luci-app-homeproxy luci-app-zerotier luci-app-openvpn-server luci-app-ipsec-vpnd luci-app-ramfree luci-app-vsftpd luci-app-usb-printer luci-app-autoreboot luci-app-syncdial luci-app-eqos luci-app-nps luci-app-softethervpn luci-app-vlmcsd luci-app-hd-idle
