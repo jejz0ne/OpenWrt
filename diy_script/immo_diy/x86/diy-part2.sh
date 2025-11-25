@@ -86,7 +86,8 @@ done
 if [ "$REPO_BRANCH" != "openwrt-23.05" ]; then
     echo "开始修复报错……"
 	# cp -f $GITHUB_WORKSPACE/personal/rust/* feeds/packages/lang/rust/Makefile
-    sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
+    # sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
+    sed -i 's/--build-dir\ $(HOST_BUILD_DIR)\/build/--build-dir\ $(HOST_BUILD_DIR)\/build\ \\\n\		--ci\ false/' feeds/packages/lang/rust/Makefile
     echo "修复完成……"
 fi
 
