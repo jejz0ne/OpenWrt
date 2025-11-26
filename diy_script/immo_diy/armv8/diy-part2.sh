@@ -84,6 +84,9 @@ done
 # 报错修复
 # sed -i 's/+libpcre/+libpcre2/g' package/feeds/telephony/freeswitch/Makefile
 
+# 修复ramfree位置问题
+sed -i '/"order":/{s/\([0-9]\+\)/"\1"/}' feeds/luci/applications/luci-app-ramfree/root/usr/share/luci/menu.d/luci-app-ramfree.json
+
 # 添加整个源仓库(git_clone)/添加源仓库内的指定目录(clone_dir)/添加源仓库内的所有目录(clone_all)
 # filebrowser luci-app-pushbot
 clone_dir main https://github.com/xiangfeidexiaohuo/2305-ipk luci-app-adguardhome luci-app-pushbot luci-app-poweroff luci-app-socat socat
