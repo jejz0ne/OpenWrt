@@ -123,6 +123,9 @@ else
     clone_dir master https://github.com/immortalwrt/packages zerotier nps socat strongswan vlmcsd vsftpd hd-idle
 fi
 
+# 修复ramfree位置问题
+sed -i '/"order":/{s/\([0-9]\+\)/"\1"/}' $destination_dir/luci-app-ramfree/root/usr/share/luci/menu.d/luci-app-ramfree.json
+
 # aria2 & ariaNG
 clone_all https://github.com/sbwml/ariang-nginx
 git_clone 22.03 https://github.com/sbwml/feeds_packages_net_aria2 aria2
