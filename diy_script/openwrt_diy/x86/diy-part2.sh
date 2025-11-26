@@ -87,7 +87,7 @@ sed -i '$a net.core.rmem_max=16777216' package/base-files/files/etc/sysctl.conf
 
 # 删除所有包含 luci-app-attendedsysupgrade 的 Makefile 行
 for f in $(grep -rl 'luci-app-attendedsysupgrade' package feeds | grep 'Makefile$'); do
-    echo -n "Cleaning $f ..."
+    echo -n "删除 $f ..."
     sed -i '/luci-app-attendedsysupgrade/d' "$f"
     echo "✅"
 done
@@ -97,11 +97,11 @@ done
 # rm -rf feeds/luci/applications/luci-app-attendedsysupgrade
 
 if [ "$REPO_BRANCH" != "openwrt-23.05" ]; then
-    echo "开始修复报错……"
+    echo -n "开始修复报错……"
     # cp -f $GITHUB_WORKSPACE/personal/rust/* feeds/packages/lang/rust/Makefile
     # sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
     sed -i 's/--build-dir\ $(HOST_BUILD_DIR)\/build/--build-dir\ $(HOST_BUILD_DIR)\/build\ \\\n\		--ci\ false/' feeds/packages/lang/rust/Makefile
-    echo "修复完成……"
+    echo "✅"
 fi
 
 # 添加整个源仓库(git_clone)/添加源仓库内的指定目录(clone_dir)/添加源仓库内的所有目录(clone_all)
