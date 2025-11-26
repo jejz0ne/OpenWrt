@@ -85,6 +85,9 @@ clone_dir master https://github.com/immortalwrt/luci luci-app-syncdial luci-app-
 # 补全依赖
 clone_dir master https://github.com/immortalwrt/packages nps n2n socat
 
+# 修复ramfree位置问题
+sed -i '/"order":/{s/\([0-9]\+\)/"\1"/}' feeds/luci/applications/luci-app-ramfree/root/usr/share/luci/menu.d/luci-app-ramfree.json
+
 # 同时兼容firewall3/4 的luci-app-socat
 clone_dir main https://github.com/chenmozhijin/luci-app-socat luci-app-socat
 
